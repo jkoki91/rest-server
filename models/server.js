@@ -10,7 +10,7 @@ class Server {
         this.port = process.env.PORT || 8081;
         this.usuariosPath = '/api/usuarios';
 
-        // Conectar a base de dator
+        // Conectar a base de datos
         this.conectarDB()
 
         // Middlewares
