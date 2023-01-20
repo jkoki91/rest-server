@@ -71,11 +71,14 @@ const usuariosPatch = ( req, res = response ) => {
     })
 };
 
-const usuariosDelete = ( req, res = response ) => {
+const usuariosDelete = async ( req, res = response ) => {
+    const { id } = req.params;
 
-    res.json({
-        msg : 'Delete api endpoint - controler'
-    })
+    // const usuario = await Usuario.findByIdAndDelete( id ); // Con esta opcion borramos al usuario fisica y permanentemente
+    
+    const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
+
+    res.json( usuario )
 };
 
 module.exports = {
