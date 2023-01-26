@@ -3,7 +3,11 @@ const { check } = require('express-validator');
 
 const { esRoleValido, emailExiste, existeUsuarioPorID } = require('../helpers/db-validators');
 const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete, usuariosPatch } = require('../controllers/usuarios');
-const { validarCampos } = require('../middlewares/validar-campos');
+
+// const { validarCampos } = require('../middlewares/validar-campos');
+// const { validarJWT } = require('../middlewares/validar-jwt');
+// const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
+const { validarCampos, validarJWT, esAdminRole, tieneRole } = require('../middlewares'); // esto es otra forma de hacer las importaciones.
 
 const router = Router();
 
@@ -28,6 +32,9 @@ router.post('/', [
     ],usuariosPost );
 
 router.delete('/:id', [
+    validarJWT,
+    // esAdminRole, //obliga a que solo puede borrar el admin
+    tieneRole('ADMIN_ROLE','VENTAS_ROLE'), //este permite que dos roles distintos puedan borrar
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( existeUsuarioPorID ),
     validarCampos

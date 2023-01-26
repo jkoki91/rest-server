@@ -33,7 +33,8 @@ const UsuarioSchema = Schema({
 })
 
 UsuarioSchema.methods.toJSON = function() { // Esta función es para quitar el password y la versión del usuario en la respuesta
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
 } 
 
