@@ -77,7 +77,9 @@ const usuariosDelete = async ( req, res = response ) => {
     // const usuario = await Usuario.findByIdAndDelete( id ); // Con esta opcion borramos al usuario fisica y permanentemente
     
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
+    // const usuarioAutenticado = req.usuario;
 
+    // res.json( {usuario, usuarioAutenticado} )
     res.json( usuario )
 };
 
