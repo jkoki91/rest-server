@@ -26,8 +26,9 @@ const ProductoSchema = Schema({
         ref: 'Categoria',
         required: true
     },
-    descripcion: { type: String},
+    descripcion: { type: String },
     disponible: { type: Boolean, default: true },
+    img: { type: String }
 });
 
 ProductoSchema.methods.toJSON = function() { // Esta función es para quitar el password y la versión del usuario en la respuesta
